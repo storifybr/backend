@@ -1,6 +1,8 @@
 package configs
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 var (
 	db     *gorm.DB
@@ -8,7 +10,18 @@ var (
 )
 
 func InitializeDatabase() error {
+	var err error
+
+	db, err = InitializePostgres()
+	if err != nil {
+		return err
+	}
+
 	return nil
+}
+
+func GetDatabase() *gorm.DB {
+	return db
 }
 
 func GetLogger(p string) *Logger {

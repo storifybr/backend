@@ -1,1 +1,18 @@
-go.sum
+# Binaries
+
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binaries
+
+*.test
+
+# Coverage
+
+*.out
+
+# Environment variables
+
+.env
