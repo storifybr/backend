@@ -7,7 +7,18 @@ import (
 )
 
 func CreateCompanyHandler(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, gin.H{
-		"message": "POST Company",
-	})
+	request := CreateCompanyRequest{}
+
+	ctx.BindJSON(&request)
+
+	if err := request.Validate(); err != nil {
+		logger.Errorf("validation error: %v", err.Error())
+		sendError(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	if err := db.Create(&request).Error; err != nil {
+		logger.Errorf("error creating company: %v", err.Error())
+		return
+	}
 }
