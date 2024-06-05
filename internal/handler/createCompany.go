@@ -35,16 +35,5 @@ func CreateCompanyHandler(ctx *gin.Context) {
 		return
 	}
 
-	companyResponse := schemas.CompanyResponse {
-		ID: company.ID,
-		Name: company.Name,
-		TaxID: company.TaxID,
-		Email: company.Email,
-		Phone: company.Phone,
-		CreatedAt: company.CreatedAt,
-		UpdatedAt: company.UpdatedAt,
-		DeletedAt: company.DeletedAt,
-	}
-
-	sendSuccess(ctx, "company creation", companyResponse)
+	sendSuccess(ctx, "company created", company)
 }

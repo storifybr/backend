@@ -18,11 +18,15 @@ func errParamIsRequired(name, typ string) error {
 	return fmt.Errorf("param: %s (type: %s) is required", name, typ)
 }
 
-type CreateCompanyRequest struct {
+type CompanyRequest struct {
 	Name  string `json:"name"`
 	TaxID string `json:"taxId"`
 	Email string `json:"email"`
 	Phone string `json:"phone"`
+}
+
+type CreateCompanyRequest struct {
+	CompanyRequest
 }
 
 func (r *CreateCompanyRequest) Validate() error {
@@ -43,4 +47,28 @@ func (r *CreateCompanyRequest) Validate() error {
 	}
 
 	return nil
+}
+
+type UpdateCompanyRequest struct {
+	CompanyRequest
+}
+
+func (r *UpdateCompanyRequest) Validate() error {
+	if r.Name != "" {
+		return nil
+	}
+
+	if r.TaxID != "" {
+		return nil
+	}
+
+	if r.Email != "" {
+		return nil
+	}
+
+	if r.Phone != "" {
+		return nil
+	}
+
+	return fmt.Errorf("at least one field must be provided")
 }
