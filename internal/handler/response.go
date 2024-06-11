@@ -27,7 +27,7 @@ type ErrorResponse struct {
 	Message string `json:"message"`
 }
 
-type CreateCompanyResponse struct {
+type CompanySuccessResponse struct {
 	Message string                  `json:"message"`
 	Data    schemas.CompanyResponse `json:"data"`
 }
