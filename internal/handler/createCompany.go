@@ -7,6 +7,18 @@ import (
 	"github.com/storify/backend/internal/schemas"
 )
 
+// @BasePath /api/v1
+
+// @Summary Create a company
+// @Description Create a new company
+// @Tags Companies
+// @Accept json
+// @Produce json
+// @Param request body CreateCompanyRequest true "Company data"
+// @Success 200 {object} CreateCompanyResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /company [post]
 func CreateCompanyHandler(ctx *gin.Context) {
 	request := CreateCompanyRequest{}
 

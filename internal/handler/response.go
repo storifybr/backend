@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/storify/backend/internal/schemas"
 )
 
 func sendError(ctx *gin.Context, code int, msg string) {
@@ -20,4 +21,13 @@ func sendSuccess(ctx *gin.Context, operation string, data interface{}) {
 		"message": fmt.Sprintf("%s successfully", operation),
 		"data":    data,
 	})
+}
+
+type ErrorResponse struct {
+	Message string `json:"message"`
+}
+
+type CreateCompanyResponse struct {
+	Message string                  `json:"message"`
+	Data    schemas.CompanyResponse `json:"data"`
 }

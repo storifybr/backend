@@ -1,4 +1,77 @@
+definitions:
+  handler.CreateCompanyRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      taxId:
+        type: string
+    type: object
+  handler.CreateCompanyResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.CompanyResponse'
+      message:
+        type: string
+    type: object
+  handler.ErrorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  schemas.CompanyResponse:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
+      taxId:
+        type: string
+      updatedAt:
+        type: string
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /company:
+    post:
+      consumes:
+      - application/json
+      description: Create a new company
+      parameters:
+      - description: Company data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateCompanyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateCompanyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Create a company
+      tags:
+      - Companies
 swagger: "2.0"
