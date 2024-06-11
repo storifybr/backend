@@ -27,7 +27,24 @@ type ErrorResponse struct {
 	Message string `json:"message"`
 }
 
-type CompanySuccessResponse struct {
+type GetCompanyResponse struct {
 	Message string                  `json:"message"`
 	Data    schemas.CompanyResponse `json:"data"`
+}
+
+type GetCompaniesResponse struct {
+	Message string                    `json:"message"`
+	Data    []schemas.CompanyResponse `json:"data"`
+}
+
+type CreateCompanyResponse struct {
+	GetCompanyResponse
+}
+
+type UpdateCompanyResponse struct {
+	GetCompanyResponse
+}
+
+type DeleteCompanyResponse struct {
+	GetCompanyResponse
 }

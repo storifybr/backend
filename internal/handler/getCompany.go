@@ -8,6 +8,18 @@ import (
 	"github.com/storify/backend/internal/schemas"
 )
 
+// @BasePath /api/v1
+
+// @Summary Get a company
+// @Description Get a company
+// @Tags Companies
+// @Accept json
+// @Produce json
+// @Param id query string true "Company identifier"
+// @Success 200 {object} GetCompanyResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /company [get]
 func GetCompanyHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 	if id == "" {

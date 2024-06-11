@@ -8,6 +8,20 @@ import (
 	"github.com/storify/backend/internal/schemas"
 )
 
+// @BasePath /api/v1
+
+// @Summary Update a company
+// @Description Update a company
+// @Tags Companies
+// @Accept json
+// @Produce json
+// @Param id query string true "Company identifier"
+// @Param request body UpdateCompanyRequest true "Company data to update"
+// @Success 200 {object} UpdateCompanyResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /company [put]
 func UpdateCompanyHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 	if id == "" {

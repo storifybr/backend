@@ -17,8 +17,49 @@ definitions:
       message:
         type: string
     type: object
+  handler.DeleteCompanyResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.CompanyResponse'
+      message:
+        type: string
+    type: object
   handler.ErrorResponse:
     properties:
+      message:
+        type: string
+    type: object
+  handler.GetCompaniesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/schemas.CompanyResponse'
+        type: array
+      message:
+        type: string
+    type: object
+  handler.GetCompanyResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.CompanyResponse'
+      message:
+        type: string
+    type: object
+  handler.UpdateCompanyRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      taxId:
+        type: string
+    type: object
+  handler.UpdateCompanyResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.CompanyResponse'
       message:
         type: string
     type: object
@@ -44,7 +85,82 @@ definitions:
 info:
   contact: {}
 paths:
+  /companies:
+    get:
+      consumes:
+      - application/json
+      description: Get all companies
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetCompaniesResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Get companies
+      tags:
+      - Companies
   /company:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a company
+      parameters:
+      - description: Company identifier
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.DeleteCompanyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Delete a company
+      tags:
+      - Companies
+    get:
+      consumes:
+      - application/json
+      description: Get a company
+      parameters:
+      - description: Company identifier
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetCompanyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Get a company
+      tags:
+      - Companies
     post:
       consumes:
       - application/json
@@ -72,6 +188,44 @@ paths:
           schema:
             $ref: '#/definitions/handler.ErrorResponse'
       summary: Create a company
+      tags:
+      - Companies
+    put:
+      consumes:
+      - application/json
+      description: Update a company
+      parameters:
+      - description: Company identifier
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Company data to update
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateCompanyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.UpdateCompanyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Update a company
       tags:
       - Companies
 swagger: "2.0"

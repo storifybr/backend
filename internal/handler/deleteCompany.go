@@ -16,9 +16,9 @@ import (
 // @Accept json
 // @Produce json
 // @Param id query string true "Company identifier"
-// @Success 200 {object} CompanySuccessResponse
+// @Success 200 {object} DeleteCompanyResponse
 // @Failure 400 {object} ErrorResponse
-// @Failure 500 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
 // @Router /company [delete]
 func DeleteCompanyHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
